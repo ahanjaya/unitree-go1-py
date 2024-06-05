@@ -1,0 +1,8 @@
+paho-mqtt
+isort
+black
+numpy
+pyyaml
+flake8
+mypy
+ipython

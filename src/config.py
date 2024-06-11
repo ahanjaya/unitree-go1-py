@@ -2,7 +2,7 @@ import yaml
 
 
 class Config(object):
-    """ """
+    """Read config parameters for running the code."""
 
     def __init__(self, fn: str) -> None:
         self._fn = fn
@@ -13,7 +13,12 @@ class Config(object):
             yaml_data = yaml.safe_load(f_obj)
 
         connections = yaml_data["connection"]
+        mqttc = connections["mqttc"]
         self.go1_host = connections["host"]
-        self.go1_port = connections["port"]
-        self.go1_keepalive = connections["keepalive"]
-        self.go1_pub_freq = connections["publish_frequency"]
+        self.go1_mqttc_port = mqttc["port"]
+        self.go1_mqttc_keepalive = mqttc["keepalive"]
+        self.go1_mqttc_pub_freq = mqttc["publish_frequency"]
+
+        udp = connections["udp"]
+        self.go1_udp_port_high = udp["port_high"]
+        self.go1_udp_port_low = udp["port_low"]

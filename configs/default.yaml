@@ -1,5 +1,12 @@
 connection:
-  host: "192.168.12.1"
-  port: 1883
-  keepalive: 5
-  publish_frequency: 100 #ms
+    host: "192.168.12.1"
+
+    mqttc:
+        port: 1883
+        keepalive: 5
+        publish_frequency: 100 #ms
+
+    udp:
+        port_high: 8082
+        port_low: 8007
+  

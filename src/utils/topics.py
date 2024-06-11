@@ -7,6 +7,8 @@ class PubTopic(StrEnum):
     action = "controller/action"
     stick = "controller/stick"
     code = "programming/code"
+    current_action = "programming/current_action"
+    run = "programming/run"
     led = "face_light/color"
 
 
@@ -15,3 +17,5 @@ class SubTopic(StrEnum):
 
     bms = "bms/state"
     firmware = "firmware/version"
+    code = "programming/code"
+    action = "programming/action"

@@ -1,5 +1,10 @@
 connection:
-    host: "192.168.12.1"
+    pc_host: "192.168.123.200" # Laptop IP address.
+    go1_host: "192.168.12.1" # Robot wifi IP address.
+    pi_host: "192.168.123.161" # Raspi wired IP address.
+    nano1_host: "192.168.12.13" # Nano1 wired IP address.
+    nano2_host: "192.168.12.14" # Nano2 wired IP address.
+    nano3_host: "192.168.12.15" # Nano3 wired IP address.
 
     mqttc:
         port: 1883
@@ -10,3 +15,10 @@ connection:
         port_high: 8082
         port_low: 8007
   
+    camera:
+        enable: false
+        port_front: 9201
+        port_jaw: 9202
+        port_left: 9203
+        port_right: 9204
+        port_belly: 9205

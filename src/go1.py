@@ -1,6 +1,7 @@
 import threading
 import time
 
+from src.camera import Go1Camera
 from src.command import HighCmd
 from src.config import Config
 from src.connections import Go1Mqtt, Go1UDP
@@ -15,6 +16,7 @@ class Go1(object):
 
         self._init_com()
         self.high_state = HighState()
+        self._init_cam()
 
     def _init_com(self) -> None:
         """Init communication network with Go1 robot."""
@@ -42,6 +44,26 @@ class Go1(object):
         )
         self._polling_states_thread.start()
 
+    def _init_cam(self) -> None:
+        if not self._config.camera_enable:
+            return
+
+        self.cam_front = Go1Camera(
+            host=self._config.pc_host, port=self._config.port_front
+        )
+        self.cam_jaw = Go1Camera(
+            host=self._config.pc_host, port=self._config.port_jaw
+        )
+        self._go1_cam_left = Go1Camera(
+            host=self._config.pc_host, port=self._config.port_left
+        )
+        self._go1_cam_right = Go1Camera(
+            host=self._config.pc_host, port=self._config.port_right
+        )
+        self._go1_cam_belly = Go1Camera(
+            host=self._config.pc_host, port=self._config.port_belly
+        )
+
     def _polling_states_thread_func(self, event, debug: bool) -> None:
         high_cmd = HighCmd()
         cmd_bytes = high_cmd.build_cmd()
@@ -63,8 +85,19 @@ class Go1(object):
     def close_all_connection(self) -> None:
         self._polling.set()
         self._polling_states_thread.join()
+
         self._go1_mqttc.disconnect()
         self._go1_udp.disconnect()
+
+        # Close all camera
+        if not self._config.camera_enable:
+            return
+
+        self.cam_front.close()
+        self.cam_jaw.close()
+        self.cam_left.close()
+        self.cam_right.close()
+        self.cam_belly.close()
 
     ###########################################
     # Stand command.

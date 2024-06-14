@@ -13,7 +13,7 @@ class HighState(object):
         """Represent Go1 state in HighLevel mode."""
 
         self.head: Tuple[str, str]  # reserve
-        self.level_flag: int  # reserve
+        self.level_flag: int  # 0x00 is high-level, 0xff is low-level
         self.frame_reserve: int  # reserve
         self.serial_number: Tuple[str, str]  # reserve
         self.version: Tuple[str, str]  # reserve
@@ -40,7 +40,7 @@ class HighState(object):
             MotorState,
             MotorState,
             MotorState,
-        ]
+        ]  # the first 12 of which are valid,
         self.bms: BMSState
         self.foot_force: FootForce  # Data from foot airbag sensor
         self.foot_force_est: FootForce  # reserve, typically zero

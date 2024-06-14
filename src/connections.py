@@ -2,6 +2,7 @@ import binascii
 import random
 import socket
 import struct
+import sys
 import threading
 
 import numpy as np
@@ -59,7 +60,16 @@ class Go1Mqtt(object):
 
         self._mqttc.on_connect = on_connect
         self._mqttc.on_message = on_message
-        self._mqttc.connect(self._host, self._port, self._keepalive)
+        try:
+            self._mqttc.connect(self._host, self._port, self._keepalive)
+        except socket.timeout as err:
+            print(
+                f"[MQTT] TimeoutError: Connection to {self._host}:{self._port} {err}."
+            )
+            print(
+                "[MQTT] Make sure you connected to robot network wireless/wired"
+            )
+            sys.exit(1)
         self._mqttc.loop_start()
 
     def disconnect(self) -> None:
@@ -202,6 +212,17 @@ class Go1UDP(object):
     def _connect(self) -> None:
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self._socket.settimeout(2.0)
+        try:
+            self._socket.connect((self._host, self._port))
+        except socket.timeout as err:
+            print(
+                f"[UDP] TimeoutError: Connection to {self._host}:{self._port} {err}."
+            )
+            self._socket.close()
+            print(
+                "[UDP] Make sure you connected to robot network wireless/wired"
+            )
+            sys.exit(1)
 
     def send(self, cmd) -> None:
         self._socket.sendto(cmd, (self._host, self._port))
@@ -217,5 +238,6 @@ class Go1UDP(object):
         print("Receive UDP thread: Stopped.")
 
     def disconnect(self) -> None:
+        self._socket.close()
         self._run_receive_thread.set()
         self._receive_thread.join()

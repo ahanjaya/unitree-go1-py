@@ -117,7 +117,8 @@ Nano 1 (Head)
 ssh unitree@192.168.123.13
 cd ~/UnitreecameraSDK/
 bash killall.sh
-./bins/example_
+./bins/example_putImagetransV1 trans_rect_config_front.yaml
+./bins/example_putImagetransV1 trans_rect_config_jaw.yaml
 ```
 
 Nano 2 (Body)
@@ -125,6 +126,8 @@ Nano 2 (Body)
 ssh unitree@192.168.123.14
 cd ~/UnitreecameraSDK/
 bash killall.sh
+./bins/example_putImagetransV1 trans_rect_config_left.yaml
+./bins/example_putImagetransV1 trans_rect_config_right.yaml
 ```
 
 Nano 3 (Head)
@@ -132,6 +135,7 @@ Nano 3 (Head)
 ssh unitree@192.168.123.15
 cd ~/UnitreecameraSDK/
 bash killall.sh
+./bins/example_putImagetransV1 trans_rect_config_belly.yaml
 ```
 
 You can refer to UnitreeCameraSDK from this [repository](https://github.com/ahanjaya/UnitreecameraSDK) for more information.

@@ -103,7 +103,7 @@ go1.set_led(LED(255, 255, 255)) # r, g, b
 ```
 
 ---
-### Receive HighLevel states.
+### Receive HighLevel states
 ```
 go1.high_state.print_states()
 ```
@@ -135,6 +135,31 @@ bash killall.sh
 ```
 
 You can refer to UnitreeCameraSDK from this [repository](https://github.com/ahanjaya/UnitreecameraSDK) for more information.
+
+---
+### Receive camera frame
+```
+go1.cam_front.latest_frame
+go1.cam_jaw.latest_frame
+go1.cam_left.latest_frame
+go1.cam_right.latest_frame
+go1.cam_belly.latest_frame
+```
+Front camera - Original image.
+<div style="text-align: center;">
+    <img src="resources/front-original.jpg" alt="Front Original" width="400"/>
+</div>
+
+Front camera - Rect image.
+<div style="text-align: center;">
+    <img src="resources/front-rect.jpg" alt="Front Rect" width="500"/>
+</div>
+
+Front camera - Depth image.
+<div style="text-align: center;">
+    <img src="resources/front-depth.jpg" alt="Front Depth" width="500"/>
+</div>
+
 
 ## Acknowlegments
 Thanks to following repositories:

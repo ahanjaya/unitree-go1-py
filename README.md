@@ -33,6 +33,7 @@ cd /opt/opencv-4.10.0/
 mkdir build
 cd build/
 conda_env_path=~/anaconda3/envs/go1
+sudo apt install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D OPENCV_GENERATE_PKGCONFIG=YES \
       -D PYTHON3_EXECUTABLE=$conda_env_path/bin/python \
@@ -47,6 +48,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D BUILD_EXAMPLES=OFF ..
 make -j32
 sudo make install
+conda install -c conda-forge libstdcxx-ng
 ```
 
 Link the shared library to the conda environment. [Not sure this step is mandatory]

@@ -1,5 +1,6 @@
 import platform
 import threading
+import warnings
 
 import cv2
 
@@ -43,10 +44,9 @@ class Go1Camera:
         while not event.is_set():
             ret, frame = self._cap.read()
             if not ret:
-                print("Make sure to run gstreamer client on each Jetson Nano.")
-                print(
-                    "Make sure to compile opencv from source not from pip install."
-                )
+                warnings.warn("Make sure to run gstreamer client on each Jetson Nano.")
+                warnings.warn("Make sure to compile opencv from source not from pip install.")
+                self.close()
 
             if frame is not None:
                 self.latest_frame = frame.copy()

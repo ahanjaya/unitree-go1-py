@@ -1,7 +1,6 @@
 connection:
     pc_host: "192.168.123.200" # Laptop IP address.
-    go1_host: "192.168.12.1" # Robot wifi IP address.
-    pi_host: "192.168.123.161" # Raspi wired IP address.
+    go1_host: "192.168.12.1" # Robot wifi IP address. Change to 123.161 for wired connection.
     nano1_host: "192.168.12.13" # Nano1 wired IP address.
     nano2_host: "192.168.12.14" # Nano2 wired IP address.
     nano3_host: "192.168.12.15" # Nano3 wired IP address.
